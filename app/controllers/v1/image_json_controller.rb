@@ -24,12 +24,13 @@ class V1::ImageJsonController < V1::RegistryController
   end
 
   def show
-    token = load_token
-    unless token
-      return render status: 401, nothing: true
-    end
+    #token = load_token
+    #unless token
+      #return render status: 401, nothing: true
+    #end
 
-    image = token.repository.images.find_by uid: params[:image_id]
+    #image = token.repository.images.find_by uid: params[:image_id]
+    image = Image.find_by uid: params[:image_id]
     unless image
       return render status: 404, nothing: true
     end
@@ -41,6 +42,8 @@ class V1::ImageJsonController < V1::RegistryController
     end
 
 
+    response.headers["X-Docker-Size"] = image.size.to_s
+    response.headers["X-Docker-Checksum"] = image.checksum if image.checksum
     render status: 200, json: json
   end
 

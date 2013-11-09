@@ -1,12 +1,14 @@
 Stevedore::Application.routes.draw do
 
+  get "repositories/index"
+  get "repositories/show"
   namespace :v1 do
     get "_ping", to: "registry#ping"
 
 
     # Index
     # - repositories
-    put "repositories/(:namespace/):repo_name", to: "repositories#create"
+    put "repositories(/:namespace)/:repo_name", to: "repositories#create"
     delete "repositories/(:namespace/):repo_name", to: "repositories#destroy"
     put "repositories(/:namespace)/:repo_name/auth", to: "repositories#auth"
 

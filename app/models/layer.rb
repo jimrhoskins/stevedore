@@ -1,6 +1,15 @@
 require 'fog'
 
 class Layer
+  def initialize(file)
+    @file = file
+  end
+
+
+  def content
+    @file.body
+  end
+
   class <<self
 
     def storage
@@ -23,6 +32,24 @@ class Layer
         body: stream,
         public: false
       )
+    end
+
+    def find(id)
+      file = directory.files.get(id)
+      file ? new(file) : nil
+    end
+
+    def head(id)
+      directory.files.head(id)
+    end
+
+    def get(id, &block)
+      directory.files.get(id, &block)
+    end
+
+    def size(id)
+      head = directory.files.head(id)
+      head ? head.content_length : 0
     end
 
   end

@@ -13,4 +13,8 @@ class Image < ActiveRecord::Base
 
     save
   end
+
+  def size
+    Layer.size(uid)
+  end
 end
