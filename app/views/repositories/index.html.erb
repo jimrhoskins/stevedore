@@ -1,2 +1,6 @@
-<h1>Repositories#index</h1>
-<p>Find me in app/views/repositories/index.html.erb</p>
+
+<% @repos.each do |repo| %>
+  <%= div_for repo do %>
+    <h2><%= link_to repo.name, repo %></h2>
+  <% end %>
+<% end %>

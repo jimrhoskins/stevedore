@@ -1,2 +1,29 @@
-<h1>Repositories#show</h1>
-<p>Find me in app/views/repositories/show.html.erb</p>
+<h1><%= fa_icon "book", class: "muted" %> <%= @repo.name %></h1>
+
+<% @repo.tags.each do |tag| %>
+  <%= tag.name %> <%= link_to hash(tag.value), image_path(tag.value) %>
+<% end %>
+
+<div class="input-group">
+  <span class="input-group-addon"><%= fa_icon 'arrow-down' %></span>
+  <%= text_field_tag :pull, "docker pull #{request.host_with_port}/#{@repo.name}",  readonly: true, class: "form-control command" %>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Image ID</th>
+      <th>Tag</th>
+      <th>Created</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @repo.repository_images.includes(:image).all.each do |ri| %>
+    <tr>
+      <td> <%= link_to hash(ri.image.uid), ri.image %> </td>
+      <td> <%= ri.tag %></td>
+      <td> <%= time_ago ri.image.built_at %></td>
+    </tr>
+  <% end%>
+  </tbody>
+</table>

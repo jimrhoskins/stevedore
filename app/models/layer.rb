@@ -1,27 +1,17 @@
 require 'fog'
 
 class Layer
-  def initialize(file)
-    @file = file
-  end
-
-
-  def content
-    @file.body
-  end
-
   class <<self
+    attr_accessor :storage_options
+    attr_accessor :storage_bucket
 
     def storage
-      @storage ||= Fog::Storage.new(
-        provider: 'Local',
-        local_root: Rails.root.join('tmp')
-      )
+      @storage ||= Fog::Storage.new(storage_options)
     end
 
     def directory
       @directory ||= storage.directories.create(
-        key: "layer-storage",
+        key: storage_bucket,
         public: false
       )
     end
@@ -32,11 +22,7 @@ class Layer
         body: stream,
         public: false
       )
-    end
-
-    def find(id)
-      file = directory.files.get(id)
-      file ? new(file) : nil
+      true
     end
 
     def head(id)

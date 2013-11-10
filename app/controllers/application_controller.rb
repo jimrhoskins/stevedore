@@ -6,6 +6,13 @@ class ApplicationController < ActionController::Base
   before_action do
     response.headers["X-Docker-Registry-Version"] = '0.6.6'
   end
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :require_user
+
+
+   def configure_permitted_parameters
+     devise_parameter_sanitizer.for(:sign_up) << :username
+   end
 
   def repo_full_name
     if params[:namespace].blank?
@@ -22,4 +29,11 @@ class ApplicationController < ActionController::Base
   def set_endpoints
     response.headers["X-Docker-Endpoints"] = request.host_with_port
   end
+
+  def require_user
+    unless current_user
+      redirect_to new_user_session_path, alert: "Please sign in to continue."
+    end
+  end
+
 end

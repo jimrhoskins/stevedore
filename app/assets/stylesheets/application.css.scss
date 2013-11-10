@@ -1,0 +1,54 @@
+@import "twitter/bootstrap";
+@import "font-awesome";
+
+body {
+  background: #DEDEDF;
+
+}
+
+.muted {
+  opacity: 0.5;
+}
+
+.hash {
+  font-family: monospace;
+}
+
+.main {
+  .navbar {
+    margin: 0 -15px 15px;
+  }
+
+  @media (min-width: $screen-sm-min) { 
+    margin-top: 50px;
+  }
+
+  @media (min-width: $screen-md-min) { 
+    width: 970px;
+  }
+
+  &.main-sessions {
+    @media (min-width: $screen-sm-min) { 
+      width: 500px;
+    }
+  }
+
+
+  min-height: 300px;
+  background: #FFF;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.avatar {
+  border-radius: 50%;
+
+  .navbar & {
+    max-height: 25px;
+    border: solid 2px #888;
+    margin-right: 5px;
+  }
+}
+
+.command[readonly] {
+  cursor: pointer;
+}

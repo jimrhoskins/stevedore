@@ -1,6 +1,5 @@
 class V1::ImagesController < V1::IndexController
   def update
-    #binding.pry
     repo = Repository.put(repo_full_name, params[:_json])
     render status: 204, nothing: true
   end

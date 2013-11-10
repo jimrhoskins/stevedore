@@ -18,7 +18,7 @@ class V1::RepositoriesController < V1::IndexController
   # No Body
   def create
     repo = Repository.put(repo_full_name, params[:_json])
-    token = repo.tokens.create( access: "write")
+    token = current_user.tokens.create( access: "write")
     set_token(token)
     set_endpoints
     render status: 200, nothing: true

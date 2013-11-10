@@ -1,0 +1,7 @@
+
+<h1>Users</h1>
+
+<% @users.each do |user| %>
+  <%= image_tag gravatar(user.email), class: "avatar" %>
+  <%= user.username %>
+<% end %>

@@ -1,7 +1,15 @@
 Stevedore::Application.routes.draw do
+  get "users/show"
+  get "users/index"
+  resources :invites
 
-  get "repositories/index"
-  get "repositories/show"
+  devise_for :users,{
+    controllers: {
+      sessions: "sessions",
+      registrations: "registrations"
+    }
+  }
+
   namespace :v1 do
     get "_ping", to: "registry#ping"
 
@@ -41,6 +49,14 @@ Stevedore::Application.routes.draw do
     get "repositories(/:namespace)/:repo_name/tags/:tag_name", to: "tags#show"
     delete "repositories(/:namespace)/:repo_name/tags/:tag_name", to: "tags#destroy"
     put "repositories(/:namespace)/:repo_name/tags/:tag_name", to: "tags#update"
+
     
   end
+
+
+  resources :users
+  get "/repos", to: "repositories#index", as: :repositories
+  get "/repos(/:namespace)/:repo_name", to: "repositories#show", as: :repository
+  get "/images/:uid", to: "images#show", as: :image
+  root to: "repositories#index"
 end

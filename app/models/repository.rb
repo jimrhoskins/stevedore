@@ -4,6 +4,10 @@ class Repository < ActiveRecord::Base
   has_many :tokens
   has_many :tags
 
+  def to_param
+    name
+  end
+
   def self.put(name, images_json)
     repo = find_or_create_by(name: name)
 

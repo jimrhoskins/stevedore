@@ -5,10 +5,66 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width">
 </head>
 <body>
 
-<%= yield %>
+  <div class="main container">
+    <div class="navbar navbar-inverse navbar-static-top">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to "Stevedore", root_path, class: "navbar-brand" %>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="<%= 'active' if params[:controller] == 'repositories' %>">
+          <%= link_to "Repos", repositories_path %>
+          </li>
+          <li class="<%= 'active' if params[:controller] == 'users' %>">
+          <%= link_to "Users", users_path  %>
+          </li>
+          <li><a href="#">Activity</a></li>
+        </ul>
+
+        <% if current_user %>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <%= image_tag gravatar(current_user.email), class: "avatar" %>
+            <%= current_user.username %>
+            <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                <%= fa_icon "lock", text: "Sign Out" %>
+              <% end %>
+            </li>
+          </ul>
+          </li>
+        </ul>
+        <% end %>
+      </div> 
+
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm-9">
+        <%= yield %>
+      </div>
+      <div class="col-sm-3">
+        Sidebar
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

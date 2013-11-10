@@ -4,7 +4,6 @@ class V1::LayersController < V1::RegistryController
 
   def update
     Layer.put(params[:image_id], request.body)
-    puts "DONEZO #{params[:image_id]}"
 
     response.stream.close
   end

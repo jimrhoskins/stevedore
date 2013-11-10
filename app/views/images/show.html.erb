@@ -1,0 +1,21 @@
+<h1><%= fa_icon "camera", class: "muted" %> Image <%= hash @image.uid %></h1>
+<% if @image.parent %>
+  <strong>Parent:</strong> <%= link_to hash(@image.parent.uid), @image.parent %>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Repo</th>
+      <th>Tag</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @image.repository_images.includes(:repository).all.each do |ri| %>
+    <tr>
+      <td> <%= link_to ri.repository.name, ri.repository %> </td>
+      <td> <%= ri.tag %></td>
+    </tr>
+  <% end%>
+  </tbody>
+</table>
