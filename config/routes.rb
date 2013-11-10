@@ -16,8 +16,6 @@ Stevedore::Application.routes.draw do
 
     # Index
     # - repositories
-    put "repositories(/:namespace)/:repo_name", to: "repositories#create"
-    delete "repositories/(:namespace/):repo_name", to: "repositories#destroy"
     put "repositories(/:namespace)/:repo_name/auth", to: "repositories#auth"
 
 
@@ -51,6 +49,8 @@ Stevedore::Application.routes.draw do
     put "repositories(/:namespace)/:repo_name/tags/:tag_name", to: "tags#update"
 
     
+    put "repositories(/:namespace)/:repo_name", to: "repositories#create"
+    delete "repositories/(:namespace/):repo_name", to: "repositories#destroy"
   end
 
 
