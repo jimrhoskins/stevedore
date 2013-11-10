@@ -7,7 +7,7 @@ Stevedore::Application.configure do
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'yourapp.heroku.com',
+    :domain         => 'stevedore-treehouse.herokuapp.com',
     :authentication => :plain,
   }
   config.action_mailer.delivery_method = :smtp
