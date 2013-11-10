@@ -15,7 +15,9 @@ class ApplicationController < ActionController::Base
    end
 
   def repo_full_name
-    if params[:namespace].blank?
+    # The docker client will refer to top level repo foo as
+    # both "foo" and "library/foo" depending on the request
+    if params[:namespace].blank? || params[:namespace] == "library"
       params[:repo_name]
     else
       "#{params[:namespace]}/#{params[:repo_name]}"
