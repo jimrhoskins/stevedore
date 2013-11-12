@@ -29,3 +29,4 @@ group :test do
   gem 'rspec-rails'
 end
 
+gem 'rails_12factor', group: :production
