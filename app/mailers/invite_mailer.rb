@@ -1,5 +1,5 @@
 class InviteMailer < ActionMailer::Base
-  default from: "no-reploy@example.com"
+  default from: ENV['MAIL_FROM_ADDRESS'] || "no-reploy@example.com"
 
   def invite_email(invite)
     @invite = invite
