@@ -12,14 +12,11 @@ class Repository < ActiveRecord::Base
     repo = find_or_create_by(name: name)
 
     if images_json
-      repo.repository_images.destroy_all
-
       images_json.each_with_index do |img, index|
-        repo.repository_images.create(
+        repo.repository_images.find_or_create_by(
           image: Image.find_or_create_by(uid: img["id"]),
           tag: img["Tag"],
-          idx: index
-        )
+        ).update_attributes!(idx: index)
       end
     end
 
