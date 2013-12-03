@@ -18,7 +18,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'pg'
 
 group :development do
-  gem "pry"
+  #gem "pry"
   gem 'sqlite3'
 end
 
