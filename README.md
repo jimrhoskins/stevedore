@@ -31,7 +31,7 @@ git push heroku master
 heroku run rake db:migrate
 
 # Setup the configs
-heroku condig:add \
+heroku config:add \
   AWS_ACCESS_KEY_ID=YOUR_ACCESS_KEY \
   AWS_SECRET_ACCESS_KEY=YOUR_SECRET \
   AWS_S3_BUCKET=BUCKET_TO_STORE_IMAGES_IN \
